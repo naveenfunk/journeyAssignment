@@ -9,6 +9,7 @@ data class Comment(
     @PrimaryKey
     val id : Long,
     val postId : Long,
-    val title : String?,
-    val description : String?
+    val name : String?,
+    val email : String?,
+    val commentText : String?
 )

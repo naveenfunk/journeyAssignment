@@ -20,13 +20,13 @@ class RemoteDataSourceImpl @Inject constructor(private val apiService: ApiServic
         return response as State<List<PostApiModelItem>>
     }
 
-    override suspend fun getComments(): State<List<CommentsApiModelItem>> {
-        val response = executeCall(apiService::getPosts)
+    override suspend fun getComments(postId : Long): State<List<CommentsApiModelItem>> {
+        val response = executeCall { apiService.getComments(postId) }
         return response as State<List<CommentsApiModelItem>>
     }
 
     private suspend fun executeCall(apiRequest : suspend () -> Response<*>) : State<*>{
-        if (networkMonitor.networkAvailable){
+        if (!networkMonitor.networkAvailable){
             return State.Error(NO_NETWORK_AVAILABLE)
         }
         return try {

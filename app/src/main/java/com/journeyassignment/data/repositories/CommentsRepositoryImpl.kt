@@ -10,11 +10,11 @@ import javax.inject.Inject
 class CommentsRepositoryImpl @Inject constructor(private val remoteDataSource: RemoteDataSource, private val localDataSource: LocalDataSource) : CommentsRepository{
 
     override suspend fun getLocalComments(postId: Long): List<Comment> {
-        return localDataSource.getLocalComments()
+        return localDataSource.getLocalComments(postId)
     }
 
     override suspend fun getRemoteComments(postId: Long): State<List<CommentsApiModelItem>> {
-        return remoteDataSource.getComments()
+        return remoteDataSource.getComments(postId)
     }
 
     override suspend fun addLocalComments(comments: List<Comment>) {

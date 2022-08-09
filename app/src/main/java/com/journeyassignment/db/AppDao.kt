@@ -18,6 +18,6 @@ interface AppDao{
     @Query("SELECT * FROM post")
     suspend fun getPosts(): List<Post>
 
-    @Query("SELECT * FROM comment")
-    suspend fun getComments(): List<Comment>
+    @Query("SELECT * FROM comment WHERE postId = :postId")
+    suspend fun getComments(postId : Long): List<Comment>
 }

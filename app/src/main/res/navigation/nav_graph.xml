@@ -15,5 +15,15 @@
     <fragment
         android:id="@+id/postDetailFragment"
         android:name="com.journeyassignment.ui.post_detail.PostDetailFragment"
-        android:label="PostDetailFragment" />
+        android:label="PostDetailFragment" >
+        <argument
+            android:name="postId"
+            app:argType="long"
+            android:defaultValue="-1L" />
+        <argument
+            android:name="postTitle"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue='' />
+    </fragment>
 </navigation>

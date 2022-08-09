@@ -4,21 +4,22 @@ import com.journeyassignment.data.repositories.CommentsRepository
 import com.journeyassignment.data.repositories.PostsRepository
 import com.journeyassignment.use_cases.GetCommentListUseCase
 import com.journeyassignment.use_cases.GetPostListUseCase
-import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-abstract class DomainModule {
+class DomainModule {
 
-    @Binds
-    @Singleton
-    abstract fun provideGetCommentsUseCase(commentsRepository: CommentsRepository) : GetCommentListUseCase
+    @Provides
+    fun provideGetCommentsUseCase(commentsRepository: CommentsRepository) : GetCommentListUseCase {
+        return GetCommentListUseCase(commentsRepository)
+    }
 
-    @Binds
-    @Singleton
-    abstract fun provideGetPostsUseCase(postsRepository: PostsRepository) : GetPostListUseCase
+    @Provides
+    fun provideGetPostsUseCase(postsRepository: PostsRepository) : GetPostListUseCase {
+        return GetPostListUseCase(postsRepository)
+    }
 }

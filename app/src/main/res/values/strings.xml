@@ -2,4 +2,8 @@
     <string name="app_name">Journey Assignment</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_internet_available">No internet available!</string>
+    <string name="something_went_wrong">Something went wrong!</string>
+    <string name="network_error">Network error!</string>
+    <string name="posts">Posts</string>
 </resources>

@@ -7,5 +7,5 @@ import com.journeyassignment.network.models.CommentsApiModelItem
 interface RemoteDataSource {
 
     suspend fun getPosts() : State<List<PostApiModelItem>>
-    suspend fun getComments() : State<List<CommentsApiModelItem>>
+    suspend fun getComments(postId : Long) : State<List<CommentsApiModelItem>>
 }

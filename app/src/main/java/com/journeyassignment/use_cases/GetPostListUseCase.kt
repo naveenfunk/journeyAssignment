@@ -12,12 +12,16 @@ class GetPostListUseCase @Inject constructor(private val postsRepository: PostsR
 
     suspend fun getPosts(): Flow<State<List<Post>>> {
         return flow {
-            emit(State.Success(postsRepository.getLocalPosts()))
+            emit(State.Loading)
+            val localPosts = postsRepository.getLocalPosts() // if local post available then send them back
+            if (localPosts.isNotEmpty()) {
+                emit(State.Success(localPosts))
+            }
 
-            val response = postsRepository.getRemotePosts()
+            val response = postsRepository.getRemotePosts() // fetch remote posts and save them into DB
             if (response is State.Success) {
                 postsRepository.addLocalPosts(response.data.toLocalPosts())
-                emit(State.Success(postsRepository.getLocalPosts()))
+                emit(State.Success(postsRepository.getLocalPosts())) // send updated posts again from local DB
             } else if (response is State.Error) {
                 emit(State.Error(response.error))
             }

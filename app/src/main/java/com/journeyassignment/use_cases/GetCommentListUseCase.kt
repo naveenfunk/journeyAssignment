@@ -12,12 +12,16 @@ class GetCommentListUseCase @Inject constructor(private val commentsRepository: 
 
     suspend fun getComments(postId: Long): Flow<State<List<Comment>>> {
         return flow {
-            emit(State.Success(commentsRepository.getLocalComments(postId)))
+            emit(State.Loading)
+            val localComments = commentsRepository.getLocalComments(postId)// if local comments available then send them back
+            if (localComments.isNotEmpty()){
+                emit(State.Success(localComments))
+            }
 
-            val response = commentsRepository.getRemoteComments(postId)
+            val response = commentsRepository.getRemoteComments(postId) // fetch remote comments and save them into DB
             if (response is State.Success) {
                 commentsRepository.addLocalComments(response.data.toLocalComments())
-                emit(State.Success(commentsRepository.getLocalComments(postId)))
+                emit(State.Success(commentsRepository.getLocalComments(postId))) // send updated comments again from local DB
             } else if (response is State.Error) {
                 emit(State.Error(response.error))
             }

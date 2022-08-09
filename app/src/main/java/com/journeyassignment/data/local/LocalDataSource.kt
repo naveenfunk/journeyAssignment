@@ -7,7 +7,7 @@ interface LocalDataSource {
 
     suspend fun getLocalPosts() : List<Post>
 
-    suspend fun getLocalComments(): List<Comment>
+    suspend fun getLocalComments(postId : Long): List<Comment>
 
     suspend fun addPostsToLocal(posts: List<Post>)
 

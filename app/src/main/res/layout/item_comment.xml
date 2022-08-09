@@ -2,6 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="comment"
+            type="com.journeyassignment.ui.post_detail.CommentUiState" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -11,7 +16,7 @@
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Testing the title"
+            android:text="@{comment.name}"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -23,7 +28,7 @@
             android:id="@+id/email"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="test@test.com"
+            android:text="@{comment.email}"
             android:textColor="@color/grey"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +40,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="Testing the description Testing the description Testing the description Testing the description Testing the description "
+            android:text="@{comment.description}"
             android:textColor="@color/black"
             android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"

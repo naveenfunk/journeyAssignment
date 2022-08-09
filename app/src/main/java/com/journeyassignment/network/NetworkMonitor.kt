@@ -7,7 +7,7 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import androidx.core.content.ContextCompat.getSystemService
 
-class NetworkMonitor(private val context: Context) {
+class NetworkMonitor(context: Context) {
 
     var networkAvailable = false
 
@@ -18,15 +18,6 @@ class NetworkMonitor(private val context: Context) {
             networkAvailable = true
         }
 
-        // Network capabilities have changed for the network
-        override fun onCapabilitiesChanged(
-            network: Network,
-            networkCapabilities: NetworkCapabilities
-        ) {
-            super.onCapabilitiesChanged(network, networkCapabilities)
-            val unmetered = networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_NOT_METERED)
-        }
-
         // lost network connection
         override fun onLost(network: Network) {
             super.onLost(network)
@@ -34,7 +25,7 @@ class NetworkMonitor(private val context: Context) {
         }
     }
 
-    fun init() {
+    init{
         val networkRequest = NetworkRequest.Builder()
             .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
             .addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
